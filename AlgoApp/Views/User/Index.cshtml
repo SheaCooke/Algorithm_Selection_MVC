@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using AlgoApp.Data 
+@using AlgoApp.Controllers 
+@using AlgoApp.ViewModel 
+@model AlgoViewModel
+
+<h1>Test</h1>
+
+<div>
+    <form method="post" asp-action="IndexPost" asp-controller="User">
+        <label asp-for="UserInput">Input</label>
+        <input type="text" asp-for="UserInput" />
+        <span asp-validation-for="UserInput"></span>
+
+
+        @*<label asp-for="Algorithm">Algorithm: </label>
+        <select asp-for="Algorithm" asp-items="@Model.AlgorithmsList">
+            <option disabled selected>--- SELECT ---</option>
+        </select>
+        <span asp-validation-for="Algorithm"></span>*@
+        <select>
+            <option val="" disabled selected>--Select--</option>
+            @foreach(var item in Model.AlgorithmsList)
+            {
+            <option val="@item.Text">@item.Text</option>
+            }
+        </select>
+
+
+        <input type="submit" value="Run" />
+    </form>
+</div>
+
+<div>
+    <h1>Results</h1>
+
+    @foreach (var i in ResponseData.Responses) //make into blocks with the users input followed by the a brief description and then the output 
+            {
+                <hr class="dashed">
+                <p>@i.text</p>
+            }
+    <p>@ViewBag.res</p>
+</div>
